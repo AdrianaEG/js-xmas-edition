@@ -13,25 +13,25 @@
 //console.log(document.formulario)//me trae el formulario que tiene como name='formulario'.
 //console.log(document.forms['carta-a-santa']); // es otra forma de hacer lo mismo. 
 
-const $formulario = document.querySelector('#carta-a-santa');//otra forma: document.formulario; es decir agarrarlo por el name... otra es document.querySelector('[name=formulario]');
+const $formulario = document.querySelector('#carta-a-santa'); //otra forma: document.formulario; es decir agarrarlo por el name... otra es document.querySelector('[name=formulario]');
 
-const nombre = $formulario.nombre.value;// otra forma document.querySelector('[name=nombre]').value;
+const nombre = $formulario.nombre.value; // otra forma document.querySelector('[name=nombre]').value;
 
-const ciudad = document.querySelector('[name=ciudad]').value;//otra forma: document.formulario.ciudad.value; o const $ciudad = $formulario.ciudad.value;
+const ciudad = document.querySelector('[name=ciudad]').value; //otra forma: document.formulario.ciudad.value; o const $ciudad = $formulario.ciudad.value;
 
-const comportamiento = $formulario.comportamiento.value;//document.querySelectorAll('[name=comportamiento]').value;
+const comportamiento = $formulario.comportamiento.value; //document.querySelectorAll('[name=comportamiento]').value;
 
-const descripcionRegalo = $formulario['descripcion-regalo'].value;//escribí el name entre llaves y con comillas porque tiene un guion en el medio :)
+const descripcionRegalo = $formulario['descripcion-regalo'].value; //escribí el name entre llaves y con comillas porque tiene un guion en el medio :)
 //otra forma de hacerlo sería esta: document.querySelector('[name=descripcion-regalo]').value;
 
-console.log(nombre);
-console.log(ciudad);
-console.log(comportamiento);
-console.log(descripcionRegalo);
+//console.log(nombre);
+//console.log(ciudad);
+//console.log(comportamiento);
+//console.log(descripcionRegalo);
 
 
-function validarNombre(nombre){
-    nombre = nombre.trim();//el .trim() es para eliminar espacios en ambos extremos.
+function validarNombre(nombre) {
+    nombre = nombre.trim(); //el .trim() es para eliminar espacios en ambos extremos.
     /* Una forma: 
     if(nombre === ''){
         console.log('Este campo debe tener al menos 1 caracter');
@@ -39,29 +39,41 @@ function validarNombre(nombre){
     else if(nombre.length > 50){
         console.log('Este campo debe tener menos de 50 caracteres');
     }*/
-    if(nombre.length===0){
-       return 'Este campo debe tener al menos 1 caracter'; 
+
+    if (nombre.length === 0) {
+        return 'Este campo debe tener al menos 1 caracter';
     }
-    else if(nombre.length>=50){
-       return 'Este campo debe tener menos de 50 caracteres'; 
+
+    if (nombre.length >= 50) {
+        return 'Este campo debe tener menos de 50 caracteres';
     }
+
+    if (!/^[a-z]+$/i.test(nombre)) { //si fuese nombre y apellido /^[a-z]+ [a-z]+$/i.test(nombre);
+        return 'el campo nombre solo acepta letras';
+    }
+
     return '';
 }
 validarNombre(nombre);
 
-function validarCiudad(ciudad){
-    if(ciudad === ""){
+function validarCiudad(ciudad) {
+    if (ciudad === '') { //se puede escribir también if(ciudad.length === 0){}
         return 'Debe seleccionar una ciudad';
     }
     return '';
 }
 console.log(validarCiudad(ciudad));
 
-function validarDescripcionRegalo(descripcionRegalo){
+function validarDescripcionRegalo(descripcionRegalo) {
     descripcionRegalo = descripcionRegalo.trim();
-    if(descripcionRegalo.length === 0){
-        return 'Debe escribir una descripción del regalo'
+    if (descripcionRegalo.length >= 100) {
+        return 'La descripción del regalo debe ser más corta';
+    } else if (descripcionRegalo.length === 0) {
+        return 'Por favor escriba una descripción del regalo';
+    } else if (!/^[a-z0-9]+$/i.test(descripcionRegalo)) {
+        return 'El campo descripción solo puede tener números y letras';
+    } else {
+        return '';
     }
-    return '';
 }
 console.log(validarDescripcionRegalo(descripcionRegalo));
