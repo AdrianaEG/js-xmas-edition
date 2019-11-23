@@ -102,7 +102,29 @@ Para validar nuestro formulario, vamos a tener  que hacer lo siguiente:
   console.log(/abc/.test("abxde"));
     // → false
   ```
-
+  
+  ```console.log(/^abc/.test('dasgdjsahajabcidsjfiodjfdsio'))
+  
+  me da false por que ^ se fija que empiece con abc y en este caso NO. 
+  
+  /^abc/.test('abcsjhdkshjfdkshfdskjdhskdhs') me da true
+  
+  /^abc[0-9]+/.test('abc86564654'); que empiece en abc y que después venga un numero o más. el "+" significa 1 o más
+  
+  /^abc[0-9]*/.test('abc'); que empieve en abc y que después si quiere que ponga numeros sino no importa. El "*" es 0 más. Para especificar cuántos quiero lo especifico entre llaves... O sea, así:
+  
+  /^abc[0-9]{1}/.test('abc5'); admite sólo un numero despues de abc.
+  
+  /^abc[0-9]{2,3}$/.test('abc123'); que empiece con abc luego vengan 2 ó 3 numeros y que no haya nada más. El signo '$' significa que quiero que termine ahí. 
+  
+  /[a-z]+/.test('ansjhasdjkashdkjs'); que el texto contenga aunque sea una letra minúscula. 
+  
+  /[a-z]+/i.test('hjakhsakjAJAHSJASHks'); lo mismo que lo anterior pero no me importa si es mayuscula o minuscula. Otra forma de hacerlo sería
+  
+  /[A-z]+/.test('sdhjhsdjsaSHASHSG');
+  
+  
+  ```
   Para validar que sólo tenga letras, podemos hacer:
 
   `const contieneSoloLetras = /^[A-z]+$/.test(valor);`
@@ -112,6 +134,10 @@ Para validar nuestro formulario, vamos a tener  que hacer lo siguiente:
 
   TODO: Agregar la validación para que sólo tenga letras.  
   TODO: Escribir una prueba
+  
+  ` /abc/ es un objeto de tipo expresión regular. y tiene varios métodos uno de ellos es el test. otro de ellos es el match que es propio de un string.
+  `
+  
 
 3.Enviando (submit) el formulario
 =====================
