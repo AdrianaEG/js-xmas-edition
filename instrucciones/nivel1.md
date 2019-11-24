@@ -224,6 +224,48 @@ Y ahora debería funcionar.
   const errores = {
     name: validarNombre(nombre)
   };
+  
+  
+  const persona = {
+    nombre: 'Adriana',
+    apellido: 'Gonzalez',
+    "fecha-nacimiento": '22-03-1993'
+  }
+  
+  console.log(persona.nombre); también puede ser persona["nombre"]
+  console.log(persona.apellido);
+  console.log(persona["fecha-nacimiento"]);
+  
+  para agregarle una propiedad:
+  
+  persona.profesion = "programador";
+  
+  para eliminar un key de un objeto:
+  
+  delete persona.profesion;
+  
+  *Un objeto puede tener otros objetos dentro, arreglos, funciones, etc. Por ejemplo:
+  
+  const miObjeto = {
+    p1: 'Hola',
+    p2: function(){
+        console.log('Holap2');
+    },
+    p3: 123,
+    p4: {
+        p5: 'Holap5'
+    },
+    p6: [{p7: 'Holap7'}]
+    }
+    
+    Para accederlos:
+    miObjeto.p1;
+    miObjeto.p2();
+    miObjeto.p3;
+    miObjeto.p4.p5;
+    miObjeto.p6[0].p7; p7 es el objeto que está dentro del array. 
+  
+  
   ```
 
   4. Ahoral o mismo para `ciudad` y `descripcion-regalo`
@@ -288,6 +330,28 @@ El método `forEach` lo podemos ver [en MDN directamente](https://developer.mozi
        cuentaErrores = cuentaErrores + errors[key].length;
     });
   ```
+  
+ ``` EJEMPLO DE FOREACH
+ document.querySelectorAll('input').forEach(function(input){console.log(input);});
+ 
+ recorre absolutamente todo el array no es como el for que si le pongo un break; se sale. 
+ 
+ 
+ supongamos que tenemos el siguiente objeto
+ errores = {
+    nombre = "Hay un error",
+    ciudad = "Hay un error"
+ };
+ 
+ puedo agarrar todos los keys de la sig forma:
+ Object.keys(errores);
+ esto me mostrará --> ["nombre", "ciudad"];
+ de la misma forma con los valores.
+ Object.values(errores) 
+ esto me mostrará --> ["Hay un error","Hay un error"]
+
+ 
+ ```
   
   Ahora el código está más limpio y es más escalable y mantenible.
 
