@@ -96,6 +96,7 @@ function manejarErrores(errores) {
 
     const $errores = document.querySelector('#errores');
 
+
     let cantidadErrores = 0;
 
     keys.forEach(function (key) { //función de callback que la llama el navegador, yo defino la función pero el navegador es el que se encarga de llamarla
@@ -113,9 +114,10 @@ function manejarErrores(errores) {
         } // esto lo que haría sería $form['nombre'].className = 'error' entonces va al form y busca el elemento que tenga el atributo  name = 'nombre' y le pone la clase que le stoy diciendo
         else {
             $form[key].className = '';
-            
+
         }
     });
+
     return cantidadErrores;
 }
 
