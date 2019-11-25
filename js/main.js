@@ -47,16 +47,25 @@ function validarFormulario(event) {
 
     //console.log(errores);
 
-    manejarErrores(errores);
+    const esExito = manejarErrores(errores) === 0;
+
+    if (esExito) {
+        document.querySelector('#exito').className = '';
+        document.querySelector('#carta-a-santa').className = 'oculto';
+
+        setTimeout(function () {
+            window.location.href = "wishlist.html";
+        }, 5000);
+    }
 
     event.preventDefault(); //cancela el evento. No deja que ese evento se siga propagando.  
     //event bubbling, si nosotros tenemos un input dentro de una etiqueta p, la cual está dentro de un div que está dentro de un body, el body está dentro de la etiqueta html, por ende si le hacemos click al input le estamos haciendo click a cada uno de los elementos. --> Acá lo puedo ver document.querySelectorAll('*').forEach(function(element){element.onclick = function (){console.log(this.tagName);}});
 }
 
 function manejarErrores(errores) {
-    errorNombre = errores.nombre;
-    errorCiudad = errores.ciudad;
-    errorDescripcionRegalo = errores.descripcionRegalo;
+    //errorNombre = errores.nombre;
+    //errorCiudad = errores.ciudad;
+    //errorDescripcionRegalo = errores.descripcionRegalo;
 
 
     /*if(errorNombre){// esto es lo mismo que if(errorNombre.length > 0) ó errorNombre !== ''
@@ -83,18 +92,31 @@ function manejarErrores(errores) {
     //Una mejor forma de hacerlo: --> Manera dinámica:
 
     const keys = Object.keys(errores);
-    console.log(keys);
+    //console.log(keys);
 
-    keys.forEach(function (key) {//función de callback que la llama el navegador, yo defino la función pero el navegador es el que se encarga de llamarla
+    const $errores = document.querySelector('#errores');
+
+    let cantidadErrores = 0;
+
+    keys.forEach(function (key) { //función de callback que la llama el navegador, yo defino la función pero el navegador es el que se encarga de llamarla
+
         const error = errores[key];
 
         if (error) {
+            cantidadErrores++;
             $form[key].className = 'error';
+
+            const $error = document.createElement('li');
+            $error.innerText = error;
+
+            $errores.appendChild($error);
         } // esto lo que haría sería $form['nombre'].className = 'error' entonces va al form y busca el elemento que tenga el atributo  name = 'nombre' y le pone la clase que le stoy diciendo
         else {
             $form[key].className = '';
+            
         }
     });
+    return cantidadErrores;
 }
 
 $form.onsubmit = validarFormulario; //onsubmit es una propiedad del objeto form. Es una función de callback, el navegador ejecuta esa función y qué parámetros se van a enviar
