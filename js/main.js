@@ -38,9 +38,16 @@ function validarFormulario(event) {
     const errorNombre = validarNombre(nombre);
     const errorCiudad = validarCiudad(ciudad);
     const errorDescripcionRegalo = validarDescripcionRegalo(descripcionRegalo);
-    
-    document.querySelector('#errores').innerText = '';
 
+    //document.querySelector('#errores').innerText = '';
+    
+    
+    let listadoErrores = document.getElementById("errores");//ul que contiene los li con los errores
+    while (listadoErrores.firstChild) {
+        listadoErrores.removeChild(listadoErrores.firstChild);
+    }
+
+    
     const errores = {
         nombre: errorNombre,
         ciudad: errorCiudad,
