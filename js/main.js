@@ -38,6 +38,8 @@ function validarFormulario(event) {
     const errorNombre = validarNombre(nombre);
     const errorCiudad = validarCiudad(ciudad);
     const errorDescripcionRegalo = validarDescripcionRegalo(descripcionRegalo);
+    
+    document.querySelector('#errores').innerText = '';
 
     const errores = {
         nombre: errorNombre,
