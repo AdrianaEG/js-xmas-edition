@@ -40,14 +40,19 @@ function validarFormulario(event) {
     const errorDescripcionRegalo = validarDescripcionRegalo(descripcionRegalo);
 
     //document.querySelector('#errores').innerText = '';
-    
-    
-    let listadoErrores = document.getElementById("errores");//ul que contiene los li con los errores
+
+
+    /* Otra forma de eliminar errores:
+    let listadoErrores = document.getElementById("errores"); //ul que contiene los li con los errores
     while (listadoErrores.firstChild) {
         listadoErrores.removeChild(listadoErrores.firstChild);
-    }
+    }*/
 
-    
+    //OTRA FORMA:
+
+    eliminarErrores();
+
+
     const errores = {
         nombre: errorNombre,
         ciudad: errorCiudad,
@@ -61,14 +66,25 @@ function validarFormulario(event) {
     if (esExito) {
         document.querySelector('#exito').className = '';
         document.querySelector('#carta-a-santa').className = 'oculto';
-
-        setTimeout(function () {
-            window.location.href = "wishlist.html";
-        }, 5000);
+        redirigir();
     }
 
     event.preventDefault(); //cancela el evento. No deja que ese evento se siga propagando.  
     //event bubbling, si nosotros tenemos un input dentro de una etiqueta p, la cual está dentro de un div que está dentro de un body, el body está dentro de la etiqueta html, por ende si le hacemos click al input le estamos haciendo click a cada uno de los elementos. --> Acá lo puedo ver document.querySelectorAll('*').forEach(function(element){element.onclick = function (){console.log(this.tagName);}});
+}
+
+function eliminarErrores() {
+    let losErrores = document.querySelectorAll('.unError');
+    losErrores.forEach(
+        function (key) {
+            key.remove();
+        });
+}
+
+function redirigir() {
+    setTimeout(function () {
+        window.location.href = "wishlist.html";
+    }, 5000); //
 }
 
 function manejarErrores(errores) {
@@ -118,7 +134,7 @@ function manejarErrores(errores) {
 
             const $error = document.createElement('li');
             $error.innerText = error;
-
+            $error.className = 'unError';
             $errores.appendChild($error);
         } // esto lo que haría sería $form['nombre'].className = 'error' entonces va al form y busca el elemento que tenga el atributo  name = 'nombre' y le pone la clase que le stoy diciendo
         else {
