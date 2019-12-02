@@ -102,7 +102,29 @@ Para validar nuestro formulario, vamos a tener  que hacer lo siguiente:
   console.log(/abc/.test("abxde"));
     // → false
   ```
-
+  
+  ```console.log(/^abc/.test('dasgdjsahajabcidsjfiodjfdsio'))
+  
+  me da false por que ^ se fija que empiece con abc y en este caso NO. 
+  
+  /^abc/.test('abcsjhdkshjfdkshfdskjdhskdhs') me da true
+  
+  /^abc[0-9]+/.test('abc86564654'); que empiece en abc y que después venga un numero o más. el "+" significa 1 o más
+  
+  /^abc[0-9]*/.test('abc'); que empieve en abc y que después si quiere que ponga numeros sino no importa. El "*" es 0 más. Para especificar cuántos quiero lo especifico entre llaves... O sea, así:
+  
+  /^abc[0-9]{1}/.test('abc5'); admite sólo un numero despues de abc.
+  
+  /^abc[0-9]{2,3}$/.test('abc123'); que empiece con abc luego vengan 2 ó 3 numeros y que no haya nada más. El signo '$' significa que quiero que termine ahí. 
+  
+  /[a-z]+/.test('ansjhasdjkashdkjs'); que el texto contenga aunque sea una letra minúscula. 
+  
+  /[a-z]+/i.test('hjakhsakjAJAHSJASHks'); lo mismo que lo anterior pero no me importa si es mayuscula o minuscula. Otra forma de hacerlo sería
+  
+  /[A-z]+/.test('sdhjhsdjsaSHASHSG');
+  
+  
+  ```
   Para validar que sólo tenga letras, podemos hacer:
 
   `const contieneSoloLetras = /^[A-z]+$/.test(valor);`
@@ -112,6 +134,10 @@ Para validar nuestro formulario, vamos a tener  que hacer lo siguiente:
 
   TODO: Agregar la validación para que sólo tenga letras.  
   TODO: Escribir una prueba
+  
+  ` /abc/ es un objeto de tipo expresión regular. y tiene varios métodos uno de ellos es el test. otro de ellos es el match que es propio de un string.
+  `
+  
 
 3.Enviando (submit) el formulario
 =====================
@@ -198,6 +224,48 @@ Y ahora debería funcionar.
   const errores = {
     name: validarNombre(nombre)
   };
+  
+  
+  const persona = {
+    nombre: 'Adriana',
+    apellido: 'Gonzalez',
+    "fecha-nacimiento": '22-03-1993'
+  }
+  
+  console.log(persona.nombre); también puede ser persona["nombre"]
+  console.log(persona.apellido);
+  console.log(persona["fecha-nacimiento"]);
+  
+  para agregarle una propiedad:
+  
+  persona.profesion = "programador";
+  
+  para eliminar un key de un objeto:
+  
+  delete persona.profesion;
+  
+  *Un objeto puede tener otros objetos dentro, arreglos, funciones, etc. Por ejemplo:
+  
+  const miObjeto = {
+    p1: 'Hola',
+    p2: function(){
+        console.log('Holap2');
+    },
+    p3: 123,
+    p4: {
+        p5: 'Holap5'
+    },
+    p6: [{p7: 'Holap7'}]
+    }
+    
+    Para accederlos:
+    miObjeto.p1;
+    miObjeto.p2();
+    miObjeto.p3;
+    miObjeto.p4.p5;
+    miObjeto.p6[0].p7; p7 es el objeto que está dentro del array. 
+  
+  
   ```
 
   4. Ahoral o mismo para `ciudad` y `descripcion-regalo`
@@ -262,6 +330,28 @@ El método `forEach` lo podemos ver [en MDN directamente](https://developer.mozi
        cuentaErrores = cuentaErrores + errors[key].length;
     });
   ```
+  
+ ``` EJEMPLO DE FOREACH
+ document.querySelectorAll('input').forEach(function(input){console.log(input);});
+ 
+ recorre absolutamente todo el array no es como el for que si le pongo un break; se sale. 
+ 
+ 
+ supongamos que tenemos el siguiente objeto
+ errores = {
+    nombre = "Hay un error",
+    ciudad = "Hay un error"
+ };
+ 
+ puedo agarrar todos los keys de la sig forma:
+ Object.keys(errores);
+ esto me mostrará --> ["nombre", "ciudad"];
+ de la misma forma con los valores.
+ Object.values(errores) 
+ esto me mostrará --> ["Hay un error","Hay un error"]
+
+ 
+ ```
   
   Ahora el código está más limpio y es más escalable y mantenible.
 
